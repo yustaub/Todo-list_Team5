@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TeamworkBackendApplication {
 
 	public static void main(String[] args) {
+		System.out.println("rukou");
 		SpringApplication.run(TeamworkBackendApplication.class, args);
 	}
 
