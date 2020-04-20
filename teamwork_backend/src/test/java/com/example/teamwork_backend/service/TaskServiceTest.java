@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -38,5 +39,13 @@ public class TaskServiceTest{
 
         assertNotNull(savedTask.getUpdatedAt());
         verify(taskStore).writeTasks(any());
+    }
+    @Test
+    public void shouldNotSaveTaskWhenIdExists(){
+        tasks.add(new Task(1L, "task"));
+        when(taskStore.readTasks()).thenReturn(tasks);
+
+        Task savedTask = taskService.saveTask(new Task(1L, "newTask"));
+        assertNull(savedTask);
     }
 }
