@@ -28,11 +28,12 @@ describe("<App>", () => {
       "Team5 homework"
     );
   });
+
   test("should add todo item correctly", async () => {
     jest
       .spyOn(TodoApi, "addTodo")
       .mockImplementation(() => Promise.resolve(addedItem));
-
+    
     await act(async () => {
       render(<App />);
     });
@@ -52,4 +53,22 @@ describe("<App>", () => {
     expect(taskItems.length).toEqual(2);
     expect(taskItems[1]).toHaveTextContent(addedItem.content);
   });
+
+  test("should delete todo item correctly", async () => {
+    jest
+      .spyOn(TodoApi, "deleteTodo")
+      .mockImplementation(() => Promise.resolve({}));
+
+
+    await act(async () => {
+      render(<App />);
+    });
+
+    act(() => {
+      fireEvent.click(getByTestId(document.body, "delete-button"));
+    });
+    await wait(() => expect(TodoApi.deleteTodo).toHaveBeenCalled());
+    expect(getByTestId(document.body, "task-items")).toBeEmpty();
+  });
+
 });

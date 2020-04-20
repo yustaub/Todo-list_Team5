@@ -10,3 +10,7 @@ export const getTodos = () => {
 export const  addTodo = (todo) => {
     return null;
 }
+
+export const deleteTodo = (todoId) => {	
+    return {}
+}
