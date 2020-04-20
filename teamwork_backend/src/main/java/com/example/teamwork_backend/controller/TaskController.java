@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -60,5 +62,10 @@ public class TaskController
     @GetMapping(produces = "application/json")
     public List<Task> getAllTasks(){
         return taskService.getAll();
+    }
+    @PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Task> update(@PathVariable Long id, @RequestBody Task task) {
+        Optional<Task> updatedTask = taskService.updateTaskById(new Task(id, task.getContent()));
+        return ResponseEntity.of(updatedTask);
     }
 }
