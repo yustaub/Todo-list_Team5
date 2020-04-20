@@ -52,4 +52,15 @@ public class TaskControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(task)))
                 .andDo(print()).andExpect(status().isConflict());
     }
+    @Test
+    public void shouldDeleteWhenTaskExists() throws Exception {
+        Task task = new Task(1L, "new");
+        when(taskService.delete(task.getId())).thenReturn(Optional.of(task));
+        this.mockMvc.perform(delete("/api/tasks/1")).andDo(print()).andExpect(status().isNoContent());
+    }
+    @Test
+    public void shouldNotDeleteIfTaskNotExists() throws Exception {
+        when(taskService.delete(1L)).thenReturn(Optional.empty());
+        this.mockMvc.perform(delete("/api/tasks/1")).andDo(print()).andExpect(status().isNotFound());
+    }
 }
