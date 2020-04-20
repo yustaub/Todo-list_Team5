@@ -94,6 +94,36 @@ public class TaskServiceTest{
         tasks.add(new Task(1L, "task"));
         when(taskStore.readTasks()).thenReturn(tasks);
         Optional<Task> task = taskService.getTaskById(2L);
-        assertFalse(task.isPresent());
+        assertFalse(task.isPresent()); 
+    }
+    @Test
+    public void shouldUpdateTaskIfExists(){
+        tasks.add(new Task(1L, "task"));
+        when(taskStore.readTasks()).thenReturn(tasks);
+
+        Optional<Task> optionalTask = taskService.updateTaskById(new Task(1L, "new task"));
+        
+        assertTrue(optionalTask.isPresent());
+
+        Task task = optionalTask.get();
+        assertEquals(1L, task.getId());
+        assertEquals("new task", task.getContent());
+        assertNotNull(task.getUpdatedAt());
+        verify(taskStore).writeTasks(any());
+    }
+    @Test
+    public void shouldNotUpdateTaskIfNotExists(){
+        tasks.add(new Task(1L, "task"));
+        when(taskStore.readTasks()).thenReturn(tasks);
+
+        Optional<Task> optionalTask = taskService.updateTaskById(new Task(2L, "new task"));
+        
+        assertTrue(optionalTask.isPresent());
+
+        Task task = optionalTask.get();
+        assertEquals(1L, task.getId());
+        assertEquals("new task", task.getContent());
+        assertNotNull(task.getUpdatedAt());
+        verify(taskStore).writeTasks(any());
     }
 }
