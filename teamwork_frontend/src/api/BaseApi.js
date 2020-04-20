@@ -8,3 +8,4 @@ export const doRequest = (path, params) => {
 	 }
 	return fetch(basePath+path, mergedParams);
 }
+

@@ -4,6 +4,7 @@ import {
   act,
   wait,
   getByTestId,
+  fireEvent,
 } from "@testing-library/react";
 import App from "./App";
 import * as TodoApi from "./api/TodoApi";
@@ -26,4 +27,20 @@ describe("<App>", () => {
       "Team5 homework"
     );
   });
+  test("should delete todo item correctly", async () => {
+    jest
+      .spyOn(TodoApi, "deleteTodo")
+      .mockImplementation(() => Promise.resolve({}));
+
+    await act(async () => {
+      render(<App />);
+    });
+
+    act(() => {
+      fireEvent.click(getByTestId(document.body, "delete-button"));
+    });
+    await wait(() => expect(TodoApi.deleteTodo).toHaveBeenCalled());
+    expect(getByTestId(document.body, "task-items")).toBeEmpty();
+  });
+
 });
