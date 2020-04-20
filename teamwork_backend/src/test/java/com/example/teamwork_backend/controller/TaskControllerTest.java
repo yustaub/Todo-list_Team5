@@ -2,6 +2,7 @@ package com.example.teamwork_backend.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.teamwork_backend.model.Task;
 import com.example.teamwork_backend.service.TaskService;
@@ -18,14 +19,14 @@ import org.springframework.http.MediaType;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.mockito.ArgumentMatchers.any;
 @WebMvcTest(TaskController.class)
 public class TaskControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private TaskService service;
+    private TaskService taskService;
 
     private List<Task> tasks = new ArrayList<Task>();
 
@@ -37,9 +38,18 @@ public class TaskControllerTest {
     public void shouldCreateTask() throws Exception {
         Task task = new Task(1L, "new");
         Task savedTask = new Task(1L, "new");
-        when(service.saveTask(task)).thenReturn(savedTask);
+        when(taskService.saveTask(any(Task.class))).thenReturn(savedTask);
         this.mockMvc.perform(post("/api/tasks")
                 .contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(task)))
                 .andDo(print()).andExpect(status().isCreated());
+    }
+
+    @Test
+    public void shouldNotCreateTaskWhenIdEixts() throws Exception {
+        Task task = new Task(1L, "new");
+        when(taskService.saveTask(any(Task.class))).thenReturn(null);
+        this.mockMvc.perform(post("/api/tasks")
+                .contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(task)))
+                .andDo(print()).andExpect(status().isConflict());
     }
 }
