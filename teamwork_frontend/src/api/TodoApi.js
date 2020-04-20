@@ -1,3 +1,8 @@
+import {doRequest} from './BaseApi'
+
+const TODO_PATH = "/api/tasks";
+
 export const getTodos = () => {
-    return null;
+    return doRequest(TODO_PATH)
+    .then(response => response.json());
 }

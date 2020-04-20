@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TodoItem from "./TodoItem";
+import {getTodos} from "./api/TodoApi";
 
 const TodoList = () => {
-    const list = [
-        {"id":1,"content":"Restful","updatedAt":"2020-04-17 20:55:08"},
-        {"id":2,"content":"React","updatedAt":"2020-04-17 22:40:00"}
-    ]
+    const [list, setList] = useState(null);
+    const [error, setError] = useState("");
+
+    const handleLoadTasks = () => {
+      getTodos()
+        .then((response) => {
+          setList(response);
+        })
+        .catch((error) => {
+          setError("Unable to retrieve todo's");
+        });
+    };
+    
+    useEffect(() => {
+      handleLoadTasks();
+    }, []);
+
+    if (list === null) {
+      return <div>Tasks is loading ...</div>;
+    }
+  
+    if (error) {
+      return <div>{error}</div>;
+    }
 
     return (     
         <ul data-testid="task-items" className="task-items">

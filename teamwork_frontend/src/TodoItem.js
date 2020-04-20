@@ -7,7 +7,8 @@ const TodoItem = ({ item }) => {
     <li className="task-item" id={"task-item-" + item.id} data-testid="task-item">
       <TextField
         value={item.content}
-        disabled="false"
+        disabled={true}
+        multiline
         data-testid="task-item-content"
       />
       <button
