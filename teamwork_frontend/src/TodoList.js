@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import TodoItem from "./TodoItem";
 import {getTodos} from "./api/TodoApi";
 
 const TodoList = () => {
     const [list, setList] = useState(null);
     const [error, setError] = useState("");
+    const inputValue = "";
 
     const handleLoadTasks = () => {
       getTodos()
@@ -15,7 +16,7 @@ const TodoList = () => {
           setError("Unable to retrieve todo's");
         });
     };
-    
+
     useEffect(() => {
       handleLoadTasks();
     }, []);
@@ -28,7 +29,19 @@ const TodoList = () => {
       return <div>{error}</div>;
     }
 
-    return (     
+    return (
+      <Fragment>
+        <div>
+          <input
+            className="task-input"
+            type="text"
+            value={inputValue}
+            data-testid="task-input"
+          />
+         <button className="submit-button" data-testid="add-button" >
+            提交
+         </button>
+        </div>
         <ul data-testid="task-items" className="task-items">
           {list.map((item) => (
             <TodoItem
@@ -37,7 +50,9 @@ const TodoList = () => {
               index={item.id}
             />
           ))}
-        </ul>    
+        </ul>
+    </Fragment>
+         
     );
   };
   
