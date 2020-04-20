@@ -1,6 +1,7 @@
 package com.example.teamwork_backend.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.example.teamwork_backend.model.Task;
@@ -59,7 +60,7 @@ public class TaskServiceTest{
 
         Optional<Task> optionalTask = taskService.delete(1L);
         assertTrue(optionalTask.isPresent());
-        
+
         Task task = optionalTask.get();
         assertEquals(1L, task.getId());
         verify(taskStore).writeTasks(any());
@@ -71,5 +72,28 @@ public class TaskServiceTest{
 
         Optional<Task> optionalTask = taskService.delete(2L);
         assertFalse(optionalTask.isPresent());
+    }
+    @Test
+    public void shouldGetAllTasks(){
+        tasks.add(new Task(1L, "task"));
+        when(taskStore.readTasks()).thenReturn(tasks);
+        List<Task> taskLists = taskService.getAll();
+        assertEquals(tasks,taskLists);
+    }
+    @Test
+    public void shouldReturnTaskIfExists(){
+        tasks.add(new Task(1L, "task"));
+        when(taskStore.readTasks()).thenReturn(tasks);
+        Optional<Task> task = taskService.getTaskById(1L);
+        assertTrue(task.isPresent());
+        assertEquals(1L, task.get().getId());
+        assertEquals("task", task.get().getContent());
+    }
+    @Test
+    public void shouldNotReturnTaskIfNotExists(){
+        tasks.add(new Task(1L, "task"));
+        when(taskStore.readTasks()).thenReturn(tasks);
+        Optional<Task> task = taskService.getTaskById(2L);
+        assertFalse(task.isPresent());
     }
 }
