@@ -1,11 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import TodoItem from "./TodoItem";
-import {getTodos, deleteTodo} from "./api/TodoApi";
+import {getTodos, deleteTodo, addTodo} from "./api/TodoApi";
+import _ from "lodash";
 
 const TodoList = () => {
     const [list, setList] = useState(null);
     const [error, setError] = useState("");
-    const inputValue = "";
+    const [inputValue, setInputValue] = useState("");
 
     const handleLoadTasks = () => {
       getTodos()
@@ -21,6 +22,20 @@ const TodoList = () => {
     deleteTodo(id).then(() => {
       setList(list.filter((item) => item.id !== id));
     });
+
+    const handleAddTask = () => {
+      if (inputValue === "") return;
+  
+      const newTask = {
+        id: _.parseInt(list.length ? list[list.length - 1].id : 0) + 1,
+        content: inputValue,
+      };
+  
+      addTodo(newTask).then(() => {
+        setList([...list, newTask]);
+        setInputValue("");
+      });
+    };
 
     useEffect(() => {
       handleLoadTasks();
@@ -41,9 +56,10 @@ const TodoList = () => {
             className="task-input"
             type="text"
             value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
             data-testid="task-input"
           />
-         <button className="submit-button" data-testid="add-button" >
+         <button className="submit-button" onClick={handleAddTask} data-testid="add-button" >
             提交
          </button>
         </div>

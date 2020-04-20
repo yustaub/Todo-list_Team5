@@ -5,6 +5,7 @@ import {
   wait,
   getByTestId,
   fireEvent,
+  getAllByTestId,
 } from "@testing-library/react";
 import App from "./App";
 import * as TodoApi from "./api/TodoApi";

@@ -14,3 +14,13 @@ export const doDeleteRequest = (path) => {
 	    method: 'delete'
 	})
 }
+
+export const doRequestWithBody = (path, method, body) => {
+	return doRequest(path, { 
+	    headers: {
+	      'content-type': 'application/json'
+	    },
+	    method, 
+	    body: JSON.stringify(body)
+	})
+}
