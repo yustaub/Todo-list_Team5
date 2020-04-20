@@ -9,3 +9,8 @@ export const doRequest = (path, params) => {
 	return fetch(basePath+path, mergedParams);
 }
 
+export const doDeleteRequest = (path) => {
+	return doRequest(path, { 
+	    method: 'delete'
+	})
+}

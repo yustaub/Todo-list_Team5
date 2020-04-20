@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import TodoItem from "./TodoItem";
-import {getTodos} from "./api/TodoApi";
+import {getTodos, deleteTodo} from "./api/TodoApi";
 
 const TodoList = () => {
     const [list, setList] = useState(null);
@@ -16,6 +16,11 @@ const TodoList = () => {
           setError("Unable to retrieve todo's");
         });
     };
+
+    const handleDeleteTask = (id) =>
+    deleteTodo(id).then(() => {
+      setList(list.filter((item) => item.id !== id));
+    });
 
     useEffect(() => {
       handleLoadTasks();
@@ -48,6 +53,7 @@ const TodoList = () => {
               key={item.id}
               item={item}
               index={item.id}
+              onItemDelete={handleDeleteTask}
             />
           ))}
         </ul>

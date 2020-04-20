@@ -1,4 +1,4 @@
-import {doRequest} from './BaseApi'
+import {doRequest, doDeleteRequest} from './BaseApi'
 
 const TODO_PATH = "/api/tasks";
 
@@ -8,5 +8,5 @@ export const getTodos = () => {
 }
 
 export const deleteTodo = (todoId) => {	
-    return {}
+    return doDeleteRequest(TODO_PATH + "/" + todoId);
 }
