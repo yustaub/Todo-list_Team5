@@ -28,7 +28,6 @@ public class TaskService{
         }
         return null;
     }
- 
     public Optional<Task> delete(Long id) {
         List<Task> tasks = store.readTasks();
         Optional<Task> any = tasks.stream().filter(task1 -> task1.getId() == id).findAny();
@@ -38,13 +37,23 @@ public class TaskService{
         }
         return any;
     }
-    public List<Task> getAllTasks(){
+    public List<Task> getAll(){
         List<Task> tasks = store.readTasks();
         return tasks;
     }
     public Optional<Task> getTaskById(Long id){
         List<Task> tasks = store.readTasks();
         Optional<Task> any = tasks.stream().filter(task1 -> task1.getId() == id).findAny();
+        return any;
+    }
+    public Optional<Task> updateTaskById(Task newTask){
+        List<Task> tasks = store.readTasks();
+        Optional<Task> any = tasks.stream().filter(task -> task.getId() == newTask.getId()).findAny();
+        if (any.isPresent()) {
+            any.get().setContent(newTask.getContent());
+            any.get().setUpdatedAt();
+            store.writeTasks(tasks);
+        }
         return any;
     }
 }
