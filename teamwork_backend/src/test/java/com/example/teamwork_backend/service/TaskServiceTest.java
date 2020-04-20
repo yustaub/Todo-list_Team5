@@ -118,12 +118,6 @@ public class TaskServiceTest{
 
         Optional<Task> optionalTask = taskService.updateTaskById(new Task(2L, "new task"));
         
-        assertTrue(optionalTask.isPresent());
-
-        Task task = optionalTask.get();
-        assertEquals(1L, task.getId());
-        assertEquals("new task", task.getContent());
-        assertNotNull(task.getUpdatedAt());
-        verify(taskStore).writeTasks(any());
+        assertFalse(optionalTask.isPresent());
     }
 }
