@@ -16,5 +16,6 @@ export const deleteTodo = (todoId) => {
 }
 
 export const updateTodo = (todo) => {
-	return {todo}
+	return doRequestWithBody(TODO_PATH + "/" + todo.id, 'put', todo)
+    .then(response => response.json());
 }

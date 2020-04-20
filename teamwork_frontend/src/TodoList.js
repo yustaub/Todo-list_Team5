@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import TodoItem from "./TodoItem";
-import {getTodos, deleteTodo, addTodo} from "./api/TodoApi";
+import {getTodos, deleteTodo, addTodo, updateTodo} from "./api/TodoApi";
 import _ from "lodash";
 
 const TodoList = () => {
@@ -37,6 +37,16 @@ const TodoList = () => {
       });
     };
 
+    const handleUpdateTask = (task) => {
+      if (task.content === "") return;
+  
+      updateTodo(task).then(() => {
+        setList(
+          list.map((x) => (x.id === task.id ? { ...x, ...task} : x))
+        );
+      });
+    };
+
     useEffect(() => {
       handleLoadTasks();
     }, []);
@@ -70,6 +80,7 @@ const TodoList = () => {
               item={item}
               index={item.id}
               onItemDelete={handleDeleteTask}
+              onItemUpdate={handleUpdateTask}
             />
           ))}
         </ul>
