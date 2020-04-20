@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.mockito.ArgumentMatchers.any;
 @WebMvcTest(TaskController.class)
 public class TaskControllerTest {
@@ -32,7 +33,7 @@ public class TaskControllerTest {
 
     @BeforeEach
     void setUp() {
-        tasks.add(new Task(1L, "a"));
+        tasks.add(new Task(1L, "task"));
     }
     @Test
     public void shouldCreateTask() throws Exception {
@@ -62,5 +63,10 @@ public class TaskControllerTest {
     public void shouldNotDeleteIfTaskNotExists() throws Exception {
         when(taskService.delete(1L)).thenReturn(Optional.empty());
         this.mockMvc.perform(delete("/api/tasks/1")).andDo(print()).andExpect(status().isNotFound());
+    }
+    @Test
+    public void shouldReturnAllTasks() throws Exception {
+        when(taskService.getAll()).thenReturn(tasks);
+        this.mockMvc.perform(get("/api/tasks")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$[0].content").value("task"));
     }
 }
