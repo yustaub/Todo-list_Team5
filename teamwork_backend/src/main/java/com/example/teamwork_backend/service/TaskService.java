@@ -38,4 +38,13 @@ public class TaskService{
         }
         return any;
     }
+    public List<Task> getAllTasks(){
+        List<Task> tasks = store.readTasks();
+        return tasks;
+    }
+    public Optional<Task> getTaskById(Long id){
+        List<Task> tasks = store.readTasks();
+        Optional<Task> any = tasks.stream().filter(task1 -> task1.getId() == id).findAny();
+        return any;
+    }
 }
