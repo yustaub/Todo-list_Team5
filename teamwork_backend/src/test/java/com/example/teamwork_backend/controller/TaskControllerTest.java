@@ -69,4 +69,21 @@ public class TaskControllerTest {
         when(taskService.getAll()).thenReturn(tasks);
         this.mockMvc.perform(get("/api/tasks")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$[0].content").value("task"));
     }
+    @Test
+    public void shouldUpdateIfTaskExists() throws Exception {
+        Task updatedTask = new Task(1L, "updated");
+        when(taskService.updateTaskById(any())).thenReturn(Optional.of(updatedTask));
+        this.mockMvc.perform(put("/api/tasks/1")
+                .contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(updatedTask)))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value("updated"));
+    }
+    @Test
+    public void shouldNotUpdateIfTaskNotExists() throws Exception {
+        Task updatedTask = new Task(1L, "updated");
+        when(taskService.updateTaskById(any())).thenReturn(Optional.empty());
+        this.mockMvc.perform(put("/api/tasks/1")
+                .contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(updatedTask)))
+                .andDo(print()).andExpect(status().isNotFound());
+    }
 }
