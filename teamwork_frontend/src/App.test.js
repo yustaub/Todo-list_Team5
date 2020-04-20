@@ -13,6 +13,8 @@ import * as TodoApi from "./api/TodoApi";
 describe("<App>", () => {
   const item = { id: 1, content: "Team5 homework", createAt: "2020/04/20" };
   const addedItem = { id: 2, content: "Team5 sing", createAt: "2020/04/20" };
+  const updateItem = { id: 1, content: "Update Item", createAt: "2020/04/21" };
+
 
   beforeEach(() => {
     jest
@@ -70,6 +72,28 @@ describe("<App>", () => {
     });
     await wait(() => expect(TodoApi.deleteTodo).toHaveBeenCalled());
     expect(getByTestId(document.body, "task-items")).toBeEmpty();
+  });
+
+  test("should edit todo item correctly", async () => {
+    jest
+      .spyOn(TodoApi, "updateTodo")
+      .mockImplementation(() => Promise.resolve(updateItem));
+
+    await act(async () => {
+      render(<App />);
+    });
+
+    const textarea = document.querySelector("li textarea");
+    act(() => {
+      fireEvent.click(getByTestId(document.body, "edit-button"));
+      fireEvent.change(textarea, {
+        target: { value: updateItem.content },
+      });
+      fireEvent.blur(textarea);
+    });
+
+    await wait(() => expect(TodoApi.updateTodo).toHaveBeenCalled());
+    expect(textarea.value).toEqual(updateItem.content);
   });
 
 });

@@ -14,3 +14,7 @@ export const  addTodo = (todo) => {
 export const deleteTodo = (todoId) => {	
     return doDeleteRequest(TODO_PATH + "/" + todoId);
 }
+
+export const updateTodo = (todo) => {
+	return {todo}
+}
