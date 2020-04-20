@@ -7,6 +7,10 @@ export const getTodos = () => {
     .then(response => response.json());
 }
 
+export const  addTodo = (todo) => {
+    return null;
+}
+
 export const deleteTodo = (todoId) => {	
     return doDeleteRequest(TODO_PATH + "/" + todoId);
 }
