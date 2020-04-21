@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class TaskStore {
@@ -43,7 +44,8 @@ public class TaskStore {
         try {
             String contents = new String(Files.readAllBytes(getFile().toPath()));
             Task[] tasks = getGson().fromJson(contents, Task[].class);
-            return Arrays.asList(tasks);
+            List<Task> arrayList = new ArrayList<Task>(Arrays.asList(tasks));
+            return arrayList;
         } catch (IOException e) {
             e.printStackTrace();
         }
