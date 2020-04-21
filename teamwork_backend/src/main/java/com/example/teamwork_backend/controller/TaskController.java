@@ -19,12 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
-
-
-
 
 @RestController
 @RequestMapping( "/api/tasks" )
@@ -47,7 +42,6 @@ public class TaskController
         //id already exists-返回 409.conflict
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        
     }
     //delete task by id
     @DeleteMapping("/{id}")
