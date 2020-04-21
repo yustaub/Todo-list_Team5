@@ -44,7 +44,6 @@ public class TaskStore {
         try {
             String contents = new String(Files.readAllBytes(getFile().toPath()));
             Task[] tasks = getGson().fromJson(contents, Task[].class);
-            // return Arrays.asList(tasks);
             List<Task> arrayList = new ArrayList<Task>(Arrays.asList(tasks));
             return arrayList;
         } catch (IOException e) {
