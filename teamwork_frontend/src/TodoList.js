@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import TodoItem from "./TodoItem";
 import {getTodos, deleteTodo, addTodo, updateTodo} from "./api/TodoApi";
 import _ from "lodash";
+import "./TodoList.css"
 
 const TodoList = () => {
     const [list, setList] = useState(null);

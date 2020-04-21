@@ -1,4 +1,5 @@
 import React from "react";
+import './TodoFooter.css'
 
 const TodoFooter = () => <footer>
 <p>Posted by: Team5</p>

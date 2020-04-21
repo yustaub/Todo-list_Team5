@@ -1,0 +1,8 @@
+h2 {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #6c615c;
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
+    text-rendering: optimizeLegibility;
+}

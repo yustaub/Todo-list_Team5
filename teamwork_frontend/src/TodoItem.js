@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import "./TodoItem.css"
 
 const TodoItem = ({ item, onItemUpdate, onItemDelete }) => {
   const [isEditable, setIsEditable] = useState(false);

@@ -1,0 +1,21 @@
+.task-items{
+    text-align: center;
+    height:auto;
+    min-height:200px;
+    display: table;
+    margin:30px auto;
+    
+}
+
+.task-input{
+    height: 30px;
+    width: 200px;
+    margin: 0 20px;
+}
+.submit-button {
+    background-color: #555555;
+    color: white;
+    height: 36px;
+    width: 80px;
+} 
+
