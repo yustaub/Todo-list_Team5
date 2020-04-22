@@ -30,11 +30,8 @@
 ### 启动
 1.更新数据文件的路径：teamwork_backend/src/main/resources/application.properties
 
-2.安装依赖
 
-`npm install`
-
-3.运行
+2.运行
 
 `./gradlew bootRun` or `./gradlew.bat bootRun`
 
