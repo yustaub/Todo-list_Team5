@@ -1,4 +1,4 @@
-import '../mock/mock'
+//import '../mock/mock'
 const basePath = (process.env.NODE_ENV === 'production' ? '/todo-list':'');
 
 export const doRequest = (path, params) => {
