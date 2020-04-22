@@ -1,4 +1,4 @@
-# Todo-list_Team5
+# Todo-list_Team9
 ## 功能
 
 - 返回所有Todo任务
@@ -8,7 +8,7 @@
 - 数据存储使用简单的文件存储
 
 ## 代码结构
-    Todo-list
+    Todo-list_Team9
        |
        |-- teamwork_backend  // 使用SpringBoot构建RESTful API
        |
@@ -26,8 +26,8 @@
       "updatedTime": "2019-05-15 00:00:00"
     }
 
-##Todo List Backend Work
-###启动
+## Todo List Backend Work
+### 启动
 1.更新数据文件的路径：teamwork_backend/src/main/resources/application.properties
 
 2.安装依赖
@@ -38,7 +38,7 @@
 
 `./gradlew bootRun` or `./gradlew.bat bootRun`
 
-##Todo List Frontend Work
+## Todo List Frontend Work
 
 ### 启动
 加载mock及其他相关包
@@ -82,9 +82,9 @@
 `"proxy": "http://127.0.0.1:8080"`
 
 
-##Todo List e2e Test
+## Todo List e2e Test
 
-###测试
+### 测试
 
 1.安装依赖
 
