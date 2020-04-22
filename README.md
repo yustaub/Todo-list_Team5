@@ -70,4 +70,4 @@
 `npm run test`
 
 ## Todo List Frontend Work
-使用mock接口模拟后端(https://github.com/yustaub/Todo-list_Team5/blob/master/teamwork_frontend/README.md)
+使用mock接口模拟后端(https://github.com/yustaub/Todo-list_Team5/tree/master/teamwork_frontend)
