@@ -12,7 +12,7 @@ describe('Todo List', function (){
         await page.close();
     });
     it('should have correct title', async function() {
-        expect(await page.title()).to.eql('Todo list');
+        expect(await page.title()).to.eql('React App');
     });
     describe('add task', function () {
         it('should create new task and add to the end', async function() {
