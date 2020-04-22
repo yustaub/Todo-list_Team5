@@ -26,7 +26,7 @@
       "updatedTime": "2019-05-15 00:00:00"
     }
 
-## Todo List Backend Work
+## 使用
 ### 进入后端文件夹
 
 `cd teamwork_backend`
@@ -38,8 +38,6 @@
 2.运行
 
 `./gradlew bootRun` or `./gradlew.bat bootRun`
-
-## Todo List Frontend Work
 
 ### 进入前端文件夹
 
@@ -70,3 +68,6 @@
 2.运行测试
 
 `npm run test`
+
+## Todo List Frontend Work
+使用mock接口模拟后端(https://github.com/yustaub/Todo-list_Team5/blob/master/teamwork_frontend/README.md)

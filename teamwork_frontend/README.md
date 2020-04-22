@@ -1,6 +1,6 @@
 # Todo List Frontend Work
 
-### 断掉与后端连接
+### 断掉与后端连接，使用Mock模拟后端
 1.解除注释 `api/BaseApi.js` 的第一行
 
 `import '../mock/mock'`
