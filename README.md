@@ -27,6 +27,10 @@
     }
 
 ## Todo List Backend Work
+### 进入后端文件夹
+
+`cd teamwork_backend`
+
 ### 启动
 1.更新数据文件的路径：teamwork_backend/src/main/resources/application.properties
 
@@ -36,6 +40,10 @@
 `./gradlew bootRun` or `./gradlew.bat bootRun`
 
 ## Todo List Frontend Work
+
+### 进入前端文件夹
+
+`cd teamwork_frontend`
 
 ### 启动
 加载mock及其他相关包
@@ -80,6 +88,10 @@
 
 
 ## Todo List e2e Test
+
+### 进入e2e文件夹
+
+`cd e2e`
 
 ### 测试
 
